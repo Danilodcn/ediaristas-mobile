@@ -1,22 +1,45 @@
 import React from "react";
+import { Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationTheme } from "ui/themes/app-theme";
-
 import EncontrarDiaristas from "pages/encontrar_diaristas";
 import Index from "pages/Index";
+import Logo from "@assets/img/logos/e-diaristas-logo.png";
 
 const Stack = createStackNavigator();
+
+export type RootStackParamList = {
+  Index: undefined;
+  EncontrarDiaristas: undefined;
+};
 
 const Router: React.FC = () => {
   return (
     <NavigationContainer theme={NavigationTheme}>
       <Stack.Navigator>
-        <Stack.Screen name="Index" component={Index} />
-        <Stack.Screen
+
+      <Stack.Screen
           name="EncontrarDiaristas"
           component={EncontrarDiaristas}
+          options={{title: "Encontrar Diaristas"}}
         />
+
+        <Stack.Screen
+          name="Index"
+          component={Index}
+          options={{
+            headerTitleAlign: "center",
+            headerTitle: () => (
+              <Image
+                source={Logo}
+                style={{ width: 150, height: 50, resizeMode: "contain" }}
+              />
+            ),
+          }}
+        />
+
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
